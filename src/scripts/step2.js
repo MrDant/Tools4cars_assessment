@@ -1,4 +1,16 @@
-function loadCarData(client) {
+async function loadCarData(client) {
+  let garages = [];
+  await new Promise((resolve) => {
+    if (client == "clientb") {
+      $.getJSON("/data/garages.json", (data) => {
+        garages = data;
+        resolve();
+      });
+    } else {
+      resolve();
+    }
+  });
+
   // Charger et afficher les données des voitures
   $.getJSON("/data/cars.json", function (data) {
     const car = data.filter((car) => car.customer === client).pop();
@@ -22,11 +34,12 @@ function loadCarData(client) {
             `;
         break;
       case "clientb":
+        const garage = garages.find((e) => e.id == car.garageId);
         carInfo = `
                 <div>
                     <p>Nom: ${car.modelName.toLowerCase()}</p>
                     <p>Marque: ${car.brand}</p>
-                    <p>Garage: ${car.garage}</p>
+                    <p>Garage: ${garage.title}</p>
                 </div>
             `;
         break;
