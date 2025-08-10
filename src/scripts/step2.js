@@ -23,14 +23,20 @@ async function loadCarData(client) {
         carInfo += `<div class="car-item" data-id=${car.id}>`;
         switch (client) {
           case "clienta":
+            const year = new Date(car.year * 1000).getFullYear();
             carInfo += `
+                  <div style="background-color: ${
+                    year < new Date().getFullYear() - 10
+                      ? "red"
+                      : year < new Date().getFullYear() - 2
+                      ? "transparent"
+                      : "green"
+                  }">
                     <p>Nom: ${car.modelName}</p>
                     <p>Marque: ${car.brand}</p>
-                    <p>Année: ${new Date(car.year, 0, 1).toLocaleDateString(
-                      "fr-FR",
-                      { year: "numeric" }
-                    )}</p>
+                    <p>Année: ${year}</p>
                     <p>Puissance: ${car.power} chevaux</p>
+                  </div>
             `;
             break;
           case "clientb":
