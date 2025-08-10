@@ -8,6 +8,7 @@
     <script src="scripts/main.js"></script>
     <script src="scripts/step1.js"></script>
     <script src="scripts/step2.js"></script>
+    <script src="scripts/step3.js"></script>
 </head>
 <body>
     <div class="dynamic-div" data-module="cars" data-script="ajax">

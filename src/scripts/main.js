@@ -14,11 +14,13 @@ function getCookie(name) {
   return cookieValue;
 }
 
+// Fonction pour afficher la vue
 function displayApp() {
   const client = getCookie("client") || "clienta";
   loadClient(client);
   loadCarData(client);
 }
+
 // Fonction principale pour initialiser l'application
 function init() {
   displayApp();
@@ -29,6 +31,7 @@ function init() {
     document.cookie = `client=${newClient}; path=/`;
     displayApp();
   });
+  addClickEvent();
 }
 
 // Initialiser l'application lorsque le document est prêt

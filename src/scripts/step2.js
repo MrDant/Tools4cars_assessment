@@ -17,12 +17,11 @@ async function loadCarData(client) {
     const carsContent = $("#cars-content");
     carsContent.empty();
 
-    let carInfo = "";
+    let carInfo = `<div class="car-item" data-id=${car.id}>`;
 
     switch (client) {
       case "clienta":
-        carInfo = `
-                <div>
+        carInfo += `
                     <p>Nom: ${car.modelName}</p>
                     <p>Marque: ${car.brand}</p>
                     <p>Année: ${new Date(car.year, 0, 1).toLocaleDateString(
@@ -30,13 +29,11 @@ async function loadCarData(client) {
                       { year: "numeric" }
                     )}</p>
                     <p>Puissance: ${car.power} chevaux</p>
-                </div>
             `;
         break;
       case "clientb":
         const garage = garages.find((e) => e.id == car.garageId);
-        carInfo = `
-                <div>
+        carInfo += `
                     <p>Nom: ${car.modelName.toLowerCase()}</p>
                     <p>Marque: ${car.brand}</p>
                     <p>Garage: ${garage.title}</p>
@@ -44,7 +41,7 @@ async function loadCarData(client) {
             `;
         break;
       case "clientc":
-        carInfo = `
+        carInfo += `
                 <div style="background-color: ${car.colorHex}; padding: 10px; margin: 10px 0; color: white">
                     <p>Nom: ${car.modelName}</p>
                     <p>Marque: ${car.brand}</p>
@@ -52,9 +49,9 @@ async function loadCarData(client) {
             `;
         break;
       default:
-        carInfo = "<div>Client non reconnu.</div>";
+        carInfo += "<div>Client non reconnu.</div>";
     }
 
-    carsContent.append(carInfo);
+    carsContent.append(carInfo + "</div>");
   });
 }
