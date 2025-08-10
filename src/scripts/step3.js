@@ -7,6 +7,6 @@ function addClickEvent() {
 
 function loadCarDetails(carId) {
   $.get("/edit.php", { carId }, function (data) {
-    $(".dynamic-div").html(data);
+    $('.dynamic-div[data-module="cars"]').html(data);
   });
 }
